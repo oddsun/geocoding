@@ -3,7 +3,7 @@ import base64
 
 import streamlit as st
 import pandas as pd 
-import geopandas as gpd 
+# import geopandas as gpd
 
 import geopy
 from geopy.geocoders import Nominatim
@@ -12,7 +12,7 @@ from geopy.extra.rate_limiter import RateLimiter
 import matplotlib.pyplot as plt
 import plotly_express as px 
 
-st.image("geocoding.jpg")
+# st.image("geocoding.jpg")
 
 st.title("Geocoding Application in Python")
 st.markdown("Uppload a CSV File with address columns (Street name & number, Postcode, City)")
@@ -34,7 +34,8 @@ def create_address_col(df):
     
 def choose_geocode_column(df):
     selection = st.selectbox("Select the column", df.columns.tolist())
-    df["geocde_col"] = df[selection]
+    # st.write(selection)
+    df["geocode_col"] = df[selection]
     return df
 
 def geocode(df):
@@ -79,6 +80,7 @@ def main():
 
         if st.checkbox("Address Formatted correctly (Example Above)"):
             df_address = choose_geocode_column(df)
+            # st.write(df_address.head())
             st.write(df_address["geocode_col"].head())
             geocoded_df = geocode(df_address)
             with st.spinner('Geocoding Hold tight...'):
